@@ -1,0 +1,33 @@
+version: '3.9'
+
+services:
+  db:
+    container_name: "product-service-database"
+    image:  postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+
+  app:
+    container_name: 'product-service-app'
+    build:
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+    ports:
+      - "8443:8443"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@email.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+      - PGADMIN_LISTEN_PORT=8888
+    ports:
+      - "8888:8888"
