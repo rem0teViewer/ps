@@ -2,7 +2,7 @@ name: Docker Image CI
 
 on:
   push:
-    branches: ['dev', 'ISSUE-2', 'master']
+    branches: ['dev', 'ISSUE-2', 'master', 'NEW']
 
 env:
   REGISTRY: ghcr.io
