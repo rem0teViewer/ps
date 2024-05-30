@@ -5,7 +5,7 @@ on:
     types: [opened, reopened]
     branches: [develop]
   push:
-    branches: [ISSUE-2-Establish-service]
+    branches: [dev]
 
 jobs:
   push_to_registries:
