@@ -1,1 +1,4 @@
 rootProject.name = 'product-service'
+
+include('product-service-module')
+include('e2e')
