@@ -7,11 +7,11 @@ networks:
 services:
 
   db:
-    container_name: "product-db"
-    image:  postgres:latest
+    container_name: "product-db-e2e"
+    image: postgres:latest
     restart: always
     ports:
-      - "5432:5432"
+      - "5454:5432"
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
@@ -19,17 +19,17 @@ services:
       - product-network
 
   app:
-    container_name: 'product-app'
+    container_name: 'product-app-e2e'
     build:
       context: .
     depends_on:
-      - db
+        - db
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5454/postgres
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
     ports:
-      - "8443:8443"
+      - "8444:8443"
     networks:
       - product-network
 
@@ -40,8 +40,8 @@ services:
     environment:
       - PGADMIN_DEFAULT_EMAIL=pgadmin@email.com
       - PGADMIN_DEFAULT_PASSWORD=admin
-      - PGADMIN_LISTEN_PORT=8888
+      - PGADMIN_LISTEN_PORT=8880
     ports:
-      - "8888:8888"
+      - "8880:8888"
     networks:
       - product-network
